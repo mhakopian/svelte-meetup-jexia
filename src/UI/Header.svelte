@@ -19,5 +19,5 @@
 </style>
 
 <header>
-  <h1>MeetUs</h1>
+  <h1>Svelte + Jexia: Meetup Clone</h1>
 </header>
