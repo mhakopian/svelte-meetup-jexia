@@ -3,8 +3,11 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
+import replace from '@rollup/plugin-replace'
+import { config } from 'dotenv'
 
 const production = !process.env.ROLLUP_WATCH
+const { parsed: { JEXIA_PROJECT_ID, JEXIA_API_KEY, JEXIA_API_SECRET } } = config()
 
 export default {
   input: 'src/main.js',
@@ -15,6 +18,13 @@ export default {
     file: 'public/build/bundle.js'
   },
   plugins: [
+    replace({
+      exclude: 'node_modules/**',
+      include: 'src/helpers/env.js',
+      'jexia-project-id': JEXIA_PROJECT_ID,
+      'jexia-key': JEXIA_API_KEY,
+      'jexia-secret': JEXIA_API_SECRET
+    }),
     svelte({
       // enable run-time checks when not in production
       dev: !production,
