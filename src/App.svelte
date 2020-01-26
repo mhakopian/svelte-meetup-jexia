@@ -1,50 +1,34 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onDestroy } from 'svelte'
   import Header from './UI/Header.svelte'
   import TextInput from './UI/TextInput.svelte'
   import Button from './UI/Button.svelte'
   import MeetupGrid from './Meetups/MeetupGrid/MeetupGrid.svelte'
   import EditMeetup from './Meetups/EditMeetup/EditMeetup.svelte'
-  import { getDataset } from './helpers/jexia-dataset'
+  import { meetupStore } from './Meetups/store'
 
   let editMode = null
   let meetups = []
 
-  const meetupDataset = getDataset('meetup')
+  const store = meetupStore()
 
-  onMount(() => {
-    // get meetups
-    meetupDataset
-      .select()
-      .subscribe(_meetups => meetups = _meetups)
-  })
+  // get meetups
+  const unsubscribe = store.subscribe(_meetups => meetups = _meetups)
+
+  onDestroy(unsubscribe)
 
   function addMeetup ({ detail: newMeetup }) {
-    meetupDataset
-      .insert(newMeetup)
-      .subscribe(([createdMeetup]) => {
-        meetups = [createdMeetup, ...meetups]
-        cancelEdit()
-      })
+    store.insert(newMeetup)
+    cancelEdit()
   }
 
   function cancelEdit () {
-    editMode = null;
+    editMode = null
   }
 
   function toggleFavorite ({ detail: meetupId }) {
-    const meetup = meetups.find(m => m.id === meetupId)
-
-    meetupDataset
-      .update({
-        id: meetupId,
-        isFavorite: meetup.isFavorite === undefined ? true : !meetup.isFavorite,
-      })
-      .subscribe(([updatedMeetup]) => {
-        Object.assign(meetup, updatedMeetup)
-        meetups = [...meetups]
-        cancelEdit()
-      })
+    store.toggleFavorite(meetupId)
+    cancelEdit()
   }
 </script>
 
