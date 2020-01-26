@@ -1,4 +1,5 @@
 import svelte from 'rollup-plugin-svelte'
+import alias from '@rollup/plugin-alias'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import autoPreprocess from 'svelte-preprocess'
@@ -25,6 +26,13 @@ export default {
       'jexia-project-id': JEXIA_PROJECT_ID,
       'jexia-key': JEXIA_API_KEY,
       'jexia-secret': JEXIA_API_SECRET
+    }),
+    alias({
+      entries: [
+        { find: '@ui', replacement: 'src/UI' },
+        { find: '@meetups', replacement: 'src/Meetups' },
+        { find: '@helpers', replacement: 'src/helpers' }
+      ]
     }),
     svelte({
       // enable run-time checks when not in production

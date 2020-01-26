@@ -1,9 +1,9 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import TextInput from '../../UI/TextInput.svelte'
-  import Button from '../../UI/Button.svelte'
-  import Modal from '../../UI/Modal.svelte'
-  import { isEmpty, isValidEmail } from '../../helpers/validation.js'
+  import TextInput from '@ui/TextInput.svelte'
+  import Button from '@ui/Button.svelte'
+  import Modal from '@ui/Modal.svelte'
+  import { isEmpty, isValidEmail } from '@helpers/validation.js'
 
   let title = ''
   let subtitle = ''

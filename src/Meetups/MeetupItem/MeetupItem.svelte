@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import Button from '../../UI/Button.svelte'
-  import Badge from '../../UI/Badge.svelte'
+  import Button from '@ui/Button.svelte'
+  import Badge from '@ui/Badge.svelte'
 
   export let id
   export let title

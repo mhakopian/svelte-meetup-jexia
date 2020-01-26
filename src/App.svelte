@@ -1,8 +1,8 @@
 <script>
   import { onDestroy } from 'svelte'
-  import Header from './UI/Header.svelte'
-  import TextInput from './UI/TextInput.svelte'
-  import Button from './UI/Button.svelte'
+  import Header from '@ui/Header.svelte'
+  import TextInput from '@ui/TextInput.svelte'
+  import Button from '@ui/Button.svelte'
   import MeetupGrid from './Meetups/MeetupGrid/MeetupGrid.svelte'
   import EditMeetup from './Meetups/EditMeetup/EditMeetup.svelte'
   import { meetupStore } from './Meetups/store'
