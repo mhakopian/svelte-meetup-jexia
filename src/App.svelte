@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte'
   import Header from './UI/Header.svelte'
-  import MeetupGrid from './Meetups/MeetupGrid.svelte'
   import TextInput from './UI/TextInput.svelte'
   import Button from './UI/Button.svelte'
-  import EditMeetup from './Meetups/EditMeetup.svelte'
+  import MeetupGrid from './Meetups/MeetupGrid/MeetupGrid.svelte'
+  import EditMeetup from './Meetups/EditMeetup/EditMeetup.svelte'
   import { getDataset } from './helpers/jexia-dataset'
 
   let editMode = null

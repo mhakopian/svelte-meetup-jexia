@@ -1,6 +1,7 @@
 import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import autoPreprocess from 'svelte-preprocess'
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 import replace from '@rollup/plugin-replace'
@@ -20,7 +21,7 @@ export default {
   plugins: [
     replace({
       exclude: 'node_modules/**',
-      include: 'src/helpers/env.js',
+      include: 'src/env.js',
       'jexia-project-id': JEXIA_PROJECT_ID,
       'jexia-key': JEXIA_API_KEY,
       'jexia-secret': JEXIA_API_SECRET
@@ -32,7 +33,8 @@ export default {
       // a separate file — better for performance
       css: css => {
         css.write('public/build/bundle.css')
-      }
+      },
+      preprocess: autoPreprocess()
     }),
 
     // If you have external dependencies installed from

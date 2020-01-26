@@ -1,32 +1,32 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import TextInput from '../UI/TextInput.svelte';
-  import Button from '../UI/Button.svelte';
-  import Modal from '../UI/Modal.svelte';
-  import { isEmpty, isValidEmail } from '../helpers/validation.js';
+  import { createEventDispatcher } from 'svelte'
+  import TextInput from '../../UI/TextInput.svelte'
+  import Button from '../../UI/Button.svelte'
+  import Modal from '../../UI/Modal.svelte'
+  import { isEmpty, isValidEmail } from '../../helpers/validation.js'
 
-  let title = '';
-  let subtitle = '';
-  let address = '';
-  let contactEmail = '';
-  let description = '';
-  let imageUrl = '';
+  let title = ''
+  let subtitle = ''
+  let address = ''
+  let contactEmail = ''
+  let description = ''
+  let imageUrl = ''
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
-  $: titleValid = !isEmpty(title);
-  $: subtitleValid = !isEmpty(subtitle);
-  $: addressValid = !isEmpty(address);
-  $: descriptionValid = !isEmpty(description);
-  $: imageUrlValid = !isEmpty(imageUrl);
-  $: emailValid = isValidEmail(contactEmail);
+  $: titleValid = !isEmpty(title)
+  $: subtitleValid = !isEmpty(subtitle)
+  $: addressValid = !isEmpty(address)
+  $: descriptionValid = !isEmpty(description)
+  $: imageUrlValid = !isEmpty(imageUrl)
+  $: emailValid = isValidEmail(contactEmail)
   $: formIsValid =
     titleValid &&
     subtitleValid &&
     addressValid &&
     descriptionValid &&
     imageUrlValid &&
-    emailValid;
+    emailValid
 
   function submitForm() {
     dispatch('save', {
@@ -35,19 +35,17 @@
       address,
       contactEmail,
       description,
-      imageUrl,
-    });
+      imageUrl
+    })
   }
 
   function cancel() {
-    dispatch('cancel');
+    dispatch('cancel')
   }
 </script>
 
-<style>
-  form {
-    width: 100%;
-  }
+<style lang="scss">
+  @import './style.scss';
 </style>
 
 <Modal title="Edit Meetup Data" on:cancel>
