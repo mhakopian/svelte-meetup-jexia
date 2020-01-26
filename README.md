@@ -1,5 +1,5 @@
 # svelte-meetup-jexia
-A meetup clone using Svelte + Jexia
+A meetup clone using Svelte + Jexia. UI gently borrowed from https://github.com/roeeyn/MeetupClone ✌🏼
 
 ## Get started
 Install the dependencies...
