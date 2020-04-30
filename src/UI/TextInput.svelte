@@ -59,7 +59,7 @@
   {#if controlType === "textarea"}
     <textarea class:invalid="{!valid && touched}" {rows} {id} bind:value on:blur={() => touched = true} />
   {:else}
-    <input class:invalid="{!valid && touched}" {type} {id} {value} on:input on:blur={() => touched = true} />
+    <input autocomplete="off" class:invalid="{!valid && touched}" {type} {id} {value} on:input on:blur={() => touched = true} />
   {/if}
   {#if validityMessage && !valid && touched}
     <p class="error-message">{validityMessage}</p>

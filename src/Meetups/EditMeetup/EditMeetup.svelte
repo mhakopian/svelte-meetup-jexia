@@ -48,7 +48,7 @@
   @import './style.scss';
 </style>
 
-<Modal title="Edit Meetup Data" on:cancel>
+<Modal title="Create meetup" on:cancel>
   <form on:submit|preventDefault={submitForm}>
     <TextInput
       id="title"

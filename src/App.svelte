@@ -42,7 +42,13 @@
     <Button on:click={() => (editMode = "add")}>New Meetup</Button>
   </div>
   {#if editMode === "add"}
-    <EditMeetup on:save={addMeetup} on:cancel={cancelEdit} />
+    <EditMeetup
+      on:save={addMeetup}
+      on:cancel={cancelEdit}
+    />
   {/if}
-  <MeetupGrid meetups={$store} on:togglefavorite={toggleFavorite} />
+  <MeetupGrid
+    meetups={$store}
+    on:togglefavorite={toggleFavorite}
+  />
 </main>
