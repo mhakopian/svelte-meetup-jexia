@@ -10,37 +10,41 @@ jexiaClient().init(jexiaCredentials, dataModule)
 const meetupDataset = dataModule.dataset('meetup')
 
 export function meetupStore () {
-  const { subscribe, set } = writable([])
-  let _meetups
+  const { subscribe, set, update } = writable([])
 
   // load meetups
   meetupDataset
     .select()
     .sortAsc('created_at')
     .subscribe(allMeetups => {
-      _meetups = allMeetups
-      set(_meetups)
+      set(allMeetups)
     })
 
   function insert (newMeetup) {
     meetupDataset
       .insert(newMeetup)
       .subscribe(([createdMeetup]) => {
-        set([createdMeetup, ..._meetups])
+        update(allMeetups => [createdMeetup, ...allMeetups])
       })
   }
 
-  function toggleFavorite (meetupId) {
-    const meetup = _meetups.find(m => m.id === meetupId)
-
+  function toggleFavorite ({ id, isFavorite }) {
     meetupDataset
       .update({
-        id: meetupId,
-        isFavorite: meetup.isFavorite === undefined ? true : !meetup.isFavorite
+        id,
+        isFavorite: !isFavorite,
       })
       .subscribe(([updatedMeetup]) => {
-        Object.assign(meetup, updatedMeetup)
-        set([..._meetups])
+        update(allMeetups => {
+          // get the index of the updated meetup
+          const updatedIndex = allMeetups.findIndex(meetup => meetup.id === id)
+          // copy original array
+          const updatedMeetups = [...allMeetups]
+          // replace updated meetup
+          updatedMeetups.splice(updatedIndex, 1, updatedMeetup)
+
+          return updatedMeetups
+        })
       })
   }
 

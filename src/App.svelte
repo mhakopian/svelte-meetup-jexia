@@ -19,8 +19,8 @@
     editMode = null
   }
 
-  function toggleFavorite ({ detail: meetupId }) {
-    store.toggleFavorite(meetupId)
+  function toggleFavorite ({ detail }) {
+    store.toggleFavorite(detail)
     cancelEdit()
   }
 </script>

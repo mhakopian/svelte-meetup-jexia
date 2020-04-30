@@ -42,7 +42,7 @@
       mode="outline"
       color={isFav ? null : 'success'}
       type="button"
-      on:click={() => dispatch('togglefavorite', id)}>
+      on:click={() => dispatch('togglefavorite', { id, isFavorite: isFav })}>
       {isFav ? 'Unfavorite' : 'Favorite'}
     </Button>
   </footer>
