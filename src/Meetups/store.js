@@ -16,6 +16,7 @@ export function meetupStore () {
   // load meetups
   meetupDataset
     .select()
+    .sortAsc('created_at')
     .subscribe(allMeetups => {
       _meetups = allMeetups
       set(_meetups)
